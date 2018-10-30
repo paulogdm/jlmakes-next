@@ -1,0 +1,15 @@
+{
+  "name": "jlmakes",
+  "version": "0.0.0",
+  "description": "Personal website of Julian Lloyd",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/jlmakes/jlmakes-next"
+  },
+  "author": "Julian Lloyd <me@jlmak.es>",
+  "license": "UNLICENSED"
+}
