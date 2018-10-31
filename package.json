@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "analyze": "cross-env analyze=1 next build"
   },
   "repository": {
     "type": "git",
@@ -16,6 +17,10 @@
     "next": "^7.0.2",
     "react": "^16.6.0",
     "react-dom": "^16.6.0"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "webpack-bundle-analyzer": "^3.0.3"
   },
   "author": "Julian Lloyd <me@jlmak.es>",
   "license": "UNLICENSED"
