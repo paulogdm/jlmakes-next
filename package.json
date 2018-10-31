@@ -4,11 +4,18 @@
   "description": "Personal website of Julian Lloyd",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
   },
   "repository": {
     "type": "git",
     "url": "github.com/jlmakes/jlmakes-next"
+  },
+  "dependencies": {
+    "next": "^7.0.2",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0"
   },
   "author": "Julian Lloyd <me@jlmak.es>",
   "license": "UNLICENSED"
