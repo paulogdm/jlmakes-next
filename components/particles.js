@@ -23,19 +23,16 @@ class Particles extends Component {
   }
 
   draw = () => {
-    const {
-      ctx,
-      dimensions: {width, height},
-    } = this.props;
+    const {ctx, dimensions} = this.props;
 
     ctx.fillStyle = '#000000';
-    ctx.fillRect(0, 0, width, height);
+    ctx.fillRect(0, 0, dimensions.width, dimensions.height);
 
     ctx.fillStyle = '#FFFFFF';
-    this.state.particles.forEach(({position: {x, y}}) => {
+    this.state.particles.forEach(({position}) => {
       ctx.save();
       ctx.beginPath();
-      ctx.arc(x, y, 1.5, 0, Math.PI * 2);
+      ctx.arc(position.x, position.y, 1.5, 0, Math.PI * 2);
       ctx.closePath();
       ctx.fill();
       ctx.restore();
