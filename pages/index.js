@@ -1,11 +1,15 @@
 import React from 'react';
 import Page from '../layouts/main';
+import Canvas from '../components/canvas';
 
 function Index() {
   return (
     <Page>
-      <h1>Hello World</h1>
-      <p>Powered by Next.js</p>
+      <Canvas>
+        {ctx => {
+          // ...
+        }}
+      </Canvas>
     </Page>
   );
 }
