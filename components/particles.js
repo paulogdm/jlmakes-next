@@ -8,7 +8,7 @@ class Particles extends Component {
     for (let i = 0; i < props.count; i++) {
       particles.push({
         position: this.getInitialPosition(),
-        velocity: new Vector2(0, Math.random() * -1),
+        velocity: this.getInitialVelocity(),
       });
     }
     this.state = {particles};
@@ -47,6 +47,10 @@ class Particles extends Component {
       Math.random() * this.props.dimensions.width,
       this.props.dimensions.height
     );
+  };
+
+  getInitialVelocity = () => {
+    return new Vector2(0, Math.random() * -1);
   };
 
   loop = () => {
