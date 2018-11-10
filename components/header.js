@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 
-export default () => (
+const Header = () => (
   <>
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -37,3 +37,5 @@ export default () => (
     </style>
   </>
 );
+
+export default Header;

@@ -1,8 +1,10 @@
 import Header from '../components/header';
 
-export default ({children}) => (
+const MainLayout = ({children}) => (
   <>
     <Header />
     {children}
   </>
 );
+
+export default MainLayout;
