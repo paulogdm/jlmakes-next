@@ -7,17 +7,15 @@ class Particles extends Component {
     let particles = [];
     for (let i = 0; i < props.count; i++) {
       particles.push({
-        position: new Vector2(
-          Math.random() * props.dimensions.width,
-          Math.random() * props.dimensions.height
-        ),
+        position: this.getInitialPosition(),
+        velocity: new Vector2(0, Math.random() * -1),
       });
     }
     this.state = {particles};
   }
 
   componentDidMount() {
-    this.draw();
+    this.loop();
   }
 
   componentDidUpdate() {
@@ -32,8 +30,8 @@ class Particles extends Component {
 
     ctx.fillStyle = '#000000';
     ctx.fillRect(0, 0, width, height);
-    ctx.fillStyle = '#FFFFFF';
 
+    ctx.fillStyle = '#FFFFFF';
     this.state.particles.forEach(({position: {x, y}}) => {
       ctx.save();
       ctx.beginPath();
@@ -42,6 +40,33 @@ class Particles extends Component {
       ctx.fill();
       ctx.restore();
     });
+  };
+
+  getInitialPosition = () => {
+    return new Vector2(
+      Math.random() * this.props.dimensions.width,
+      this.props.dimensions.height
+    );
+  };
+
+  loop = () => {
+    window.requestAnimationFrame(() => {
+      this.update();
+      this.loop();
+    });
+  };
+
+  move = particle => {
+    const delta = Vector2.add(particle.position, particle.velocity);
+    return delta.y > 0 ? delta : this.getInitialPosition();
+  };
+
+  update = () => {
+    const particles = this.state.particles.map(particle => ({
+      ...particle,
+      position: this.move(particle),
+    }));
+    this.setState({particles});
   };
 
   render() {
