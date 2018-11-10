@@ -7,8 +7,10 @@ class Particles extends Component {
     let particles = [];
     for (let i = 0; i < props.count; i++) {
       particles.push({
-        position: new Vector2(),
-        direction: new Vector2(),
+        position: new Vector2(
+          Math.random() * props.dimensions.width,
+          Math.random() * props.dimensions.height
+        ),
       });
     }
     this.state = {particles};
@@ -23,9 +25,23 @@ class Particles extends Component {
   }
 
   draw = () => {
-    const {width, height} = this.props.dimensions;
-    this.props.ctx.fillStyle = '#000000';
-    this.props.ctx.fillRect(0, 0, width, height);
+    const {
+      ctx,
+      dimensions: {width, height},
+    } = this.props;
+
+    ctx.fillStyle = '#000000';
+    ctx.fillRect(0, 0, width, height);
+    ctx.fillStyle = '#FFFFFF';
+
+    this.state.particles.forEach(({position: {x, y}}) => {
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(x, y, 1.5, 0, Math.PI * 2);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    });
   };
 
   render() {
