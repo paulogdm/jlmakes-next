@@ -7,9 +7,7 @@ function Index() {
   return (
     <Page>
       <Canvas>
-        {(ctx, dimensions) => {
-          <Particles ctx={ctx} dimensions={dimensions} />;
-        }}
+        {(ctx, dimensions) => <Particles ctx={ctx} dimensions={dimensions} />}
       </Canvas>
     </Page>
   );
