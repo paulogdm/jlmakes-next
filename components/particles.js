@@ -15,10 +15,18 @@ class Particles extends Component {
   }
 
   componentDidMount() {
+    this.draw();
+  }
+
+  componentDidUpdate() {
+    this.draw();
+  }
+
+  draw = () => {
     const {width, height} = this.props.dimensions;
     this.props.ctx.fillStyle = '#000000';
     this.props.ctx.fillRect(0, 0, width, height);
-  }
+  };
 
   render() {
     return null;
