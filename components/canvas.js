@@ -37,7 +37,7 @@ class Canvas extends Component {
     return (
       <>
         <canvas ref={this.ref} {...dimensions} />
-        {this.props.children(this.ctx)}
+        {this.props.children(this.ctx, dimensions)}
       </>
     );
   }
