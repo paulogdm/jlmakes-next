@@ -1,17 +1,17 @@
 import React from 'react';
-import Page from '../layouts/main';
-import Canvas from '../components/canvas';
-import Particles from '../components/particles';
+import MainLayout from '../layouts/MainLayout';
+import Canvas from '../components/Canvas';
+import Particles from '../components/Particles';
 
 function Index() {
   return (
-    <Page>
+    <MainLayout>
       <Canvas>
         {(ctx, dimensions) => (
           <Particles count={50} ctx={ctx} dimensions={dimensions} />
         )}
       </Canvas>
-    </Page>
+    </MainLayout>
   );
 }
 

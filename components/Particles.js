@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Vector2 from '../utils/vector2';
+import Vector2 from '../utils/Vector2';
 import SimplexNoise from 'simplex-noise';
 
 class Particles extends Component {
