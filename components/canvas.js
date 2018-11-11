@@ -36,7 +36,7 @@ class Canvas extends Component {
 
     return (
       <>
-        <canvas ref={this.ref} {...dimensions} />
+        <canvas ref={this.ref} {...dimensions} style={{display: 'block'}} />
         {dimensions.width &&
           dimensions.height &&
           this.props.children(this.ctx, dimensions)}
