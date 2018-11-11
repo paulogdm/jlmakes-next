@@ -55,4 +55,14 @@ export default class Vector2 {
   static normalize(vector) {
     return Vector2.divide(vector, Vector2.magnitude(vector));
   }
+
+  // Clockwise:
+  //   0.0 π rads is up
+  //   0.5 π rads is right
+  //   1.0 π rads is down
+  //   1.5 π rads is left
+
+  static fromAngle(theta) {
+    return new Vector2(Math.sin(theta), Math.cos(theta));
+  }
 }
