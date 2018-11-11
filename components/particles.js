@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Vector2 from '../utils/vector2';
+import SimplexNoise from 'simplex-noise';
 
 class Particles extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class Particles extends Component {
       });
     }
     this.state = {particles};
+    this.simplex = new SimplexNoise();
     this.frameIds = [];
   }
 
@@ -62,10 +64,13 @@ class Particles extends Component {
 
   move = particle => {
     const delta = Vector2.add(particle.position, particle.velocity);
+    const theta = this.simplex.noise2D(delta.x, delta.y);
+    const simplex = Vector2.fromAngle(theta);
+    const noise = Vector2.multiply(simplex, -1);
 
     let position;
     if (delta.y > 0) {
-      position = delta;
+      position = Vector2.add(delta, noise);
     } else {
       position = this.getRandomPosition();
       position.y = this.props.dimensions.height;
