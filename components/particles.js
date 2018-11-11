@@ -7,11 +7,12 @@ class Particles extends Component {
     let particles = [];
     for (let i = 0; i < props.count; i++) {
       particles.push({
-        position: this.getInitialPosition(),
+        position: this.getRandomPosition(),
         velocity: this.getInitialVelocity(),
       });
     }
     this.state = {particles};
+    this.frameIds = [];
   }
 
   componentDidMount() {
@@ -20,6 +21,10 @@ class Particles extends Component {
 
   componentDidUpdate() {
     this.draw();
+  }
+
+  componentWillUnmount() {
+    this.frameIds.forEach(cancelAnimationFrame);
   }
 
   draw = () => {
@@ -39,34 +44,40 @@ class Particles extends Component {
     });
   };
 
-  getInitialPosition = () => {
+  getRandomPosition = () => {
     return new Vector2(
       Math.random() * this.props.dimensions.width,
-      this.props.dimensions.height
+      Math.random() * this.props.dimensions.height
     );
   };
 
   getInitialVelocity = () => {
-    return new Vector2(0, Math.random() * -1);
+    return new Vector2(0, Math.PI / -3 - Math.random());
   };
 
   loop = () => {
-    window.requestAnimationFrame(() => {
-      this.update();
-      this.loop();
-    });
+    this.update();
+    this.frameIds.push(requestAnimationFrame(this.loop));
   };
 
   move = particle => {
     const delta = Vector2.add(particle.position, particle.velocity);
-    return delta.y > 0 ? delta : this.getInitialPosition();
+
+    let position;
+    if (delta.y > 0) {
+      position = delta;
+    } else {
+      position = this.getRandomPosition();
+      position.y = this.props.dimensions.height;
+    }
+    return {
+      ...particle,
+      position,
+    };
   };
 
   update = () => {
-    const particles = this.state.particles.map(particle => ({
-      ...particle,
-      position: this.move(particle),
-    }));
+    const particles = this.state.particles.map(this.move);
     this.setState({particles});
   };
 
