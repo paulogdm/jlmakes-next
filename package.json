@@ -16,7 +16,8 @@
   "dependencies": {
     "next": "^7.0.2",
     "react": "^16.6.0",
-    "react-dom": "^16.6.0"
+    "react-dom": "^16.6.0",
+    "simplex-noise": "^2.4.0"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",
