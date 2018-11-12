@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import Vector2 from '../utils/Vector2';
 import SimplexNoise from 'simplex-noise';
+import rangeMap from '../utils/rangeMap';
+import Sign from '../utils/Sign';
 
 class Particles extends Component {
   constructor(props) {
@@ -15,6 +17,7 @@ class Particles extends Component {
     this.state = {particles};
     this.simplex = new SimplexNoise();
     this.frameIds = [];
+    this.scale = 1;
   }
 
   componentDidMount() {
@@ -32,14 +35,14 @@ class Particles extends Component {
   draw = () => {
     const {ctx, dimensions} = this.props;
 
-    ctx.fillStyle = '#000000';
+    ctx.fillStyle = 'rgba(5, 5, 5, 0.08)';
     ctx.fillRect(0, 0, dimensions.width, dimensions.height);
 
-    ctx.fillStyle = '#FFFFFF';
+    ctx.fillStyle = '#888888';
     this.state.particles.forEach(({position}) => {
       ctx.save();
       ctx.beginPath();
-      ctx.arc(position.x, position.y, 1.5, 0, Math.PI * 2);
+      ctx.arc(position.x, position.y, 1.25, 0, Math.PI * 2);
       ctx.closePath();
       ctx.fill();
       ctx.restore();
@@ -54,7 +57,10 @@ class Particles extends Component {
   };
 
   getInitialVelocity = () => {
-    return new Vector2(0, Math.PI / -3 - Math.random());
+    return new Vector2(
+      (Math.PI / 2) * Sign.random() - Math.random(),
+      (Math.PI / 2) * Sign.random() - Math.random()
+    );
   };
 
   loop = () => {
@@ -63,10 +69,17 @@ class Particles extends Component {
   };
 
   move = particle => {
+    const {width, height} = this.props.dimensions;
+
     const delta = Vector2.add(particle.position, particle.velocity);
-    const theta = this.simplex.noise2D(delta.x, delta.y);
-    const simplex = Vector2.fromAngle(theta);
-    const noise = Vector2.multiply(simplex, -1);
+    const deltaMapX = rangeMap(delta.x, 0, width, 0, this.scale);
+    const deltaMapY = rangeMap(delta.y, 0, height, 0, this.scale);
+
+    const theta = this.simplex.noise2D(deltaMapX, deltaMapY);
+    const thetaMap = rangeMap(theta, -1, 1, 0, Math.PI * 2);
+
+    const noiseVector = Vector2.fromAngle(thetaMap);
+    const noise = Vector2.multiply(noiseVector, 3);
 
     let position;
     if (delta.y > 0) {

@@ -8,7 +8,7 @@ function Index() {
     <MainLayout>
       <Canvas>
         {(ctx, dimensions) => (
-          <Particles count={50} ctx={ctx} dimensions={dimensions} />
+          <Particles count={600} ctx={ctx} dimensions={dimensions} />
         )}
       </Canvas>
     </MainLayout>
