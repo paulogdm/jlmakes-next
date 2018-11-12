@@ -15,6 +15,7 @@ const Header = () => (
           padding: 0;
           height: 100%;
           box-sizing: border-box;
+          background: rgb(10, 10, 10);
         }
 
         *,
