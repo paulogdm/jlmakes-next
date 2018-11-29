@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import Vector2 from '../utils/Vector2';
 import SimplexNoise from 'simplex-noise';
 import rangeMap from '../utils/rangeMap';
