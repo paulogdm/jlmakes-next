@@ -7,7 +7,7 @@ function MainLayout({children}) {
       <Wrapper>
         <Header />
         <Main>{children}</Main>
-        <Footer>This is the footer.</Footer>
+        <Footer>...</Footer>
       </Wrapper>
     </>
   );
@@ -53,8 +53,9 @@ function Footer({children}) {
         {`
           footer {
             flex-shrink: 0;
-            height: 240px;
-            background: #222;
+            height: 320px;
+            background: #030108;
+            border-top: 1px solid #241226;
           }
         `}
       </style>
