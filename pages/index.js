@@ -10,7 +10,7 @@ function Index() {
       <Vignette />
       <Canvas>
         {(ctx, dimensions) => (
-          <Particles count={600} ctx={ctx} dimensions={dimensions} />
+          <Particles count={800} ctx={ctx} dimensions={dimensions} />
         )}
       </Canvas>
     </MainLayout>

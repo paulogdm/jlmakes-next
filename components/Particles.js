@@ -14,7 +14,11 @@ class Particles extends Component {
         velocity: this.getInitialVelocity(),
       });
     }
-    this.state = {particles, phase: 0, scale: 1};
+    this.state = {
+      particles,
+      phase: 0,
+      scale: 1,
+    };
     this.simplex = new SimplexNoise();
     this.frameIds = [];
   }
@@ -34,10 +38,10 @@ class Particles extends Component {
   draw = () => {
     const {ctx, dimensions} = this.props;
 
-    ctx.fillStyle = 'rgba(5, 5, 5, 0.08)';
+    ctx.fillStyle = 'rgba(5, 5, 15, 0.08)';
     ctx.fillRect(0, 0, dimensions.width, dimensions.height);
 
-    ctx.fillStyle = '#AAA';
+    ctx.fillStyle = '#befffc80';
     this.state.particles.forEach(({position}) => {
       ctx.save();
       ctx.beginPath();
@@ -98,7 +102,7 @@ class Particles extends Component {
     const particles = this.state.particles.map(this.move);
     this.setState(prevState => ({
       particles,
-      phase: prevState.phase + prevState.scale / 2500,
+      phase: prevState.phase + prevState.scale / 2000,
     }));
   };
 
