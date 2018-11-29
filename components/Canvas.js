@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 
-class Canvas extends Component {
+class Canvas extends PureComponent {
   ref = React.createRef();
   state = {
     width: 0,
