@@ -14,10 +14,9 @@ class Particles extends Component {
         velocity: this.getInitialVelocity(),
       });
     }
-    this.state = {particles};
+    this.state = {particles, phase: 0, scale: 1};
     this.simplex = new SimplexNoise();
     this.frameIds = [];
-    this.scale = 1;
   }
 
   componentDidMount() {
@@ -38,11 +37,11 @@ class Particles extends Component {
     ctx.fillStyle = 'rgba(5, 5, 5, 0.08)';
     ctx.fillRect(0, 0, dimensions.width, dimensions.height);
 
-    ctx.fillStyle = '#888888';
+    ctx.fillStyle = '#AAA';
     this.state.particles.forEach(({position}) => {
       ctx.save();
       ctx.beginPath();
-      ctx.arc(position.x, position.y, 1.25, 0, Math.PI * 2);
+      ctx.arc(position.x, position.y, 2, 0, Math.PI * 2);
       ctx.closePath();
       ctx.fill();
       ctx.restore();
@@ -70,10 +69,11 @@ class Particles extends Component {
 
   move = particle => {
     const {width, height} = this.props.dimensions;
+    const {phase, scale} = this.state;
 
     const delta = Vector2.add(particle.position, particle.velocity);
-    const deltaMapX = rangeMap(delta.x, 0, width, 0, this.scale);
-    const deltaMapY = rangeMap(delta.y, 0, height, 0, this.scale);
+    const deltaMapX = rangeMap(delta.x, 0, width, phase, phase + scale);
+    const deltaMapY = rangeMap(delta.y, 0, height, phase, phase + scale);
 
     const theta = this.simplex.noise2D(deltaMapX, deltaMapY);
     const thetaMap = rangeMap(theta, -1, 1, 0, Math.PI * 2);
@@ -96,7 +96,10 @@ class Particles extends Component {
 
   update = () => {
     const particles = this.state.particles.map(this.move);
-    this.setState({particles});
+    this.setState(prevState => ({
+      particles,
+      phase: prevState.phase + prevState.scale / 2500,
+    }));
   };
 
   render() {
