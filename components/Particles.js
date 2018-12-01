@@ -43,12 +43,16 @@ class Particles extends Component {
 
     ctx.fillStyle = '#befffc80';
     this.state.particles.forEach(({position}) => {
-      ctx.save();
-      ctx.beginPath();
-      ctx.arc(position.x, position.y, 2, 0, Math.PI * 2);
-      ctx.closePath();
-      ctx.fill();
-      ctx.restore();
+      let isInBoundsX = position.x > 0 && position.x <= dimensions.width;
+      let isInBoundsY = position.y > 0 && position.y <= dimensions.height;
+      if (isInBoundsX && isInBoundsY) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(position.x, position.y, 2, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+      }
     });
   };
 
