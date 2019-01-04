@@ -2,7 +2,7 @@
   "version": 2,
   "name": "jlmakes",
   "alias": [
-    "jlmakes"
+    "jlmakes-next"
   ],
   "regions": ["sfo1"],
   "builds": [
