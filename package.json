@@ -15,9 +15,9 @@
     "url": "github.com/jlmakes/jlmakes-next"
   },
   "dependencies": {
-    "next": "^7.0.2",
-    "react": "^16.6.0",
-    "react-dom": "^16.6.0",
+    "next": "^8.0.0-canary.2",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
     "simplex-noise": "^2.4.0"
   },
   "devDependencies": {
