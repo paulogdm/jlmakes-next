@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "name": "jlmakes",
+  "alias": [
+    "jlmakes"
+  ],
+  "regions": ["sfo1"],
+  "builds": [
+    {"src": "package.json", "use": "@now/next@canary"}
+  ]
+}
